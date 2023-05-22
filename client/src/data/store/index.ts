@@ -1,16 +1,18 @@
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
-import {DropboxApi} from "../dropbox/DropboxApi";
+import {DropboxLoginApi} from "../dropbox/DropboxLoginApi";
 import {setupListeners} from "@reduxjs/toolkit/query";
 import {persistReducer, persistStore} from "redux-persist";
 import thunk from "redux-thunk";
 import storage from "redux-persist/lib/storage";
+import {DropboxFilesApi} from "../dropbox/DropboxFilesApi";
 
 const persistConfig = {
     key: "root", storage,
 };
 
 const rootReducer = combineReducers({
-    [DropboxApi.reducerPath]: DropboxApi.reducer
+    [DropboxLoginApi.reducerPath]: DropboxLoginApi.reducer,
+    [DropboxFilesApi.reducerPath]: DropboxFilesApi.reducer
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -22,7 +24,8 @@ export const store = configureStore({
         serializableCheck: false,
     }).concat(
         thunk,
-        DropboxApi.middleware,
+        DropboxFilesApi.middleware,
+        DropboxLoginApi.middleware,
     )
 })
 

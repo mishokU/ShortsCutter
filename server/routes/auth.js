@@ -37,16 +37,14 @@ userRouter.get('/login', (request, result) => {
 
 userRouter.get('/credentials', (request, result) => { // eslint-disable-line no-unused-vars
     const {code} = request.query;
-    console.log(`code:${code}`);
     dbx.auth
         .getAccessTokenFromCode(redirectUri, code)
         .then((token) => {
-            console.log(`Token Result:${JSON.stringify(token)}`);
             dbx.auth.setRefreshToken(token.result.refresh_token);
             dbx.usersGetCurrentAccount()
                 .then((response) => {
                     console.log('response', response);
-                    result.redirect('http://localhost:3000/main')
+                    result.redirect(`http://localhost:3000/main?token=${token.result.access_token}`)
                 })
                 .catch((error) => {
                     console.error(error);

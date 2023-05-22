@@ -5,6 +5,33 @@
 body {
     background-color: #0E1420;
     max-width: 100%;
-    font-family: 'Lexend', sans-serif;
+    font-family: 'Poppins', sans-serif;
     overflow-x: hidden;
+}
+
+.react-player {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+
+@layer utilities {
+    .scrollbar::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+    }
+    .scrollbar::-webkit-scrollbar-track {
+        border-radius: 100vh;
+        background: #f7f4ed;
+    }
+
+    .scrollbar::-webkit-scrollbar-thumb {
+        background: #8fadc0;
+        border-radius: 100vh;
+    }
+
+    .scrollbar::-webkit-scrollbar-thumb:hover {
+        background: #0E1420;
+    }
 }

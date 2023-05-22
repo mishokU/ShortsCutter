@@ -13,7 +13,6 @@ const mountRoutes = require('./routes')
 
 mountRoutes(app)
 
-
 app.listen(config.port, () => {
     console.log(`Sever is now listening at port ${config.port}`);
 });

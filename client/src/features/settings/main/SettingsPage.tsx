@@ -28,14 +28,6 @@ export function SettingsPage() {
                             Choose logo overlay
                         </button>
                     </div>
-                    <div className="space-y-4">
-                        <h2 className="text-xl">Preset text position</h2>
-                        <button
-                            onClick={onOpenTextSettingsClick}
-                            className={buttonTheme}>
-                            Text settings
-                        </button>
-                    </div>
                     <div className="flex justify-center">
                         <button
                             onClick={onNextClick}

@@ -27,7 +27,7 @@ export default function SettingsViewModel() {
         if (cookies.folderPath === "") {
             setError('First set working folder path!')
         } else if (isBackButtonVisible) {
-
+            navigate(ShortsCutterRoutes.main)
         } else {
             navigate(ShortsCutterRoutes.main)
         }
