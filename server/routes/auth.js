@@ -1,6 +1,7 @@
-const {Router} = require("express");
-const {Dropbox} = require("dropbox");
+const {Router} = require("express")
+const {Dropbox} = require("dropbox")
 const config = require('../config')
+const userController = require("../controllers/UserController")
 
 const userRouter = new Router()
 
@@ -42,8 +43,11 @@ userRouter.get('/credentials', (request, result) => { // eslint-disable-line no-
         .then((token) => {
             dbx.auth.setRefreshToken(token.result.refresh_token);
             dbx.usersGetCurrentAccount()
-                .then((response) => {
-                    console.log('response', response);
+                .then(async (response) => {
+                    await userController.createOrUpdateUser(
+                        response.result.email,
+                        token.result.access_token
+                    )
                     result.redirect(`http://localhost:3000/main?token=${token.result.access_token}`)
                 })
                 .catch((error) => {

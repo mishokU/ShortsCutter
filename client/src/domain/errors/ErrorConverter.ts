@@ -1,6 +1,5 @@
 export enum ErrorType {
-    LOGIN, UNDEFINED,
-    NOT_EXISTS
+    LOGIN, UNDEFINED, NOT_EXISTS
 }
 
 export interface ErrorModel {
@@ -28,10 +27,20 @@ export class ErrorConverter {
             return {
                 message: "Content do not exists!", type: ErrorType.NOT_EXISTS
             }
+        } else if (status === 401) {
+            return {
+                message: "Please, login again!", type: ErrorType.LOGIN
+            }
         } else {
             return {
                 message: "Undefined error!", type: ErrorType.UNDEFINED
             }
+        }
+    }
+
+    convertMessage(message: string): ErrorModel {
+        return {
+            message: message, type: ErrorType.UNDEFINED
         }
     }
 

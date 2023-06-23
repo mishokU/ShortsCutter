@@ -7,6 +7,5 @@ export enum DocumentType {
 export interface DocumentEntityUi {
     id: string
     name: string
-    icon: string
     type: DocumentType
 }

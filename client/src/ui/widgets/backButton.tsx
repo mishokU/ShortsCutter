@@ -1,4 +1,4 @@
-import {useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom"
 import backImg from "../assets/left_24px.png"
 
 export function BackButton() {

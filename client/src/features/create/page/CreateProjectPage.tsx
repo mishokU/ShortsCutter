@@ -1,4 +1,3 @@
-import {BackButton} from "../../../ui/widgets/backButton";
 import useViewModel from "./CreateProjectViewModel"
 import {FileItem} from "../items/file/FileItem";
 import {FolderItem} from "../items/folder/FolderItem";
@@ -14,12 +13,19 @@ import {PathsComponent} from "../items/paths/PathsComponent";
 import {ShowContentDialog} from "../dialogs/showContent/ShowContentDialog";
 import {TimemarksComponent} from "../timemarks/TimemarksComponent";
 import {buttonThemeFitBig} from "../../../ui/Themes";
+import {useParams} from "react-router-dom";
+import {DeleteIcon} from "../../../ui/widgets/DeleteIcon";
 
 export function CreateProjectPage() {
+
+    const {projectId} = useParams()
+
     const {
-        state, onFolderClick, onBackClick, onPathClick, onFileClick, onCheckFileClick, onSettingsClick, onEditClick
-    } = useViewModel()
+        state, onFolderClick, onBackClick, onPathClick, onFileClick, onCheckFileClick, onSettingsClick, onEditClick, onNameChanged, onDeleteClick
+    } = useViewModel(projectId)
+
     const {onLoginClick} = useAuthViewModel()
+
     return <div className="h-full relative overflow-hidden">
         <button
             type="button"
@@ -28,9 +34,20 @@ export function CreateProjectPage() {
             <img src={backImg} />
             <span className="sr-only">Icon description</span>
         </button>
-        <div className="absolute left-1/2 top-8 w-fit -translate-x-1/2">
-            <input className="bg-transparent text-white text-center border-2 border-secondary p-2 rounded-md text-2xl w-fit" placeholder="Project name" />
-        </div>
+        {state.error === null && <div className="absolute left-1/2 top-8 w-fit -translate-x-1/2">
+            <input
+                value={state.projectName}
+                onChange={(field) => onNameChanged(field.target.value)}
+                className="bg-transparent text-white text-center border-2 border-secondary p-2 rounded-md text-2xl w-fit"
+                placeholder="Project name" />
+        </div>}
+        <button
+            type="button"
+            onClick={onDeleteClick}
+            className="bg-error z-10 absolute right-8 top-8 rounded-full w-14 h-14 p-4 text-center inline-flex">
+            <DeleteIcon />
+            <span className="sr-only">Icon description</span>
+        </button>
         {state.showContentHandler !== null && <ShowContentDialog handler={state.showContentHandler} />}
         {(state.error === null && !state.isEmpty) && <div className="p-32 flex w-full h-full space-x-12">
             <div className="min-w-[600px]">
@@ -49,7 +66,7 @@ export function CreateProjectPage() {
                         file={item as FileUi} />)))}
                 </div>
             </div>
-            <TimemarksComponent file={state.selectedFile} />
+            <TimemarksComponent file={state.selectedFile} projectId={state.projectId} />
             <p className="mt-32 text-paragraph text-2xl">
                 This you can find all your files in dropbox and select one, after selection set timemarks to download
                 and press "Edit"

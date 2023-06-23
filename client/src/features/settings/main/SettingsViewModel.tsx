@@ -6,7 +6,7 @@ import {useState} from "react";
 export default function SettingsViewModel() {
 
     const [cookies, setCookies] = useCookies(['folderPath']);
-    const [isBackButtonVisible, setIsBackButtonVisible] = useState(cookies.folderPath !== "")
+    const [isBackButtonVisible] = useState(cookies.folderPath !== "")
     const [error, setError] = useState<string | null>(null)
     const navigate = useNavigate()
 

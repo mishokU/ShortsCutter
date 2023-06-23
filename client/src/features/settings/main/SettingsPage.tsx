@@ -4,7 +4,7 @@ import useViewModel from "./SettingsViewModel"
 
 export function SettingsPage() {
     const {
-        onOpenTextSettingsClick, isBackButtonVisible, onNextClick, onLogoOverlayClick, onDirChanged, error, cookies
+        isBackButtonVisible, onNextClick, onLogoOverlayClick, onDirChanged, error, cookies
     } = useViewModel()
     return <div className="h-full relative">
         {isBackButtonVisible && <BackButton />}

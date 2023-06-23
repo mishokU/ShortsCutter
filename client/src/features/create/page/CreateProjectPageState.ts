@@ -10,6 +10,8 @@ export interface CreateProjectPageState {
     error: ErrorModel | null
     showContentHandler: ShowContentHandler | null
     selectedFile: FileUi | null
+    projectName: string
+    projectId: number | null
 }
 
 export interface ShowContentHandler {
@@ -18,14 +20,16 @@ export interface ShowContentHandler {
     isShowContentModalVisible: boolean
 }
 
-export function initCreateProjectPageState(): CreateProjectPageState {
+export function initCreateProjectPageState(projectId: string | undefined): CreateProjectPageState {
     return {
         path: "Dropbox",
         items: [],
         isEmpty: false,
         isLoading: true,
+        projectName: "",
         showContentHandler: null,
         error: null,
-        selectedFile: null
+        selectedFile: null,
+        projectId: Number(projectId)
     }
 }

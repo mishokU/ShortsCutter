@@ -14,8 +14,12 @@ export interface FileResponse {
     path_lower: string
     path_display: string
     id: string
-    fileBinary: string
+    media_info: MediaInfo
     client_modified: string
     server_modified: string
     is_downloadable: boolean
+}
+
+export interface MediaInfo {
+    name: string
 }

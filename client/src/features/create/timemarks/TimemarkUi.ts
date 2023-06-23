@@ -1,6 +1,8 @@
 
 
 export interface TimemarkUi {
-    time: string
+    id: number
     index: number
+    startTime: string
+    endTime: string
 }

@@ -1,9 +1,8 @@
 import {useEffect, useState} from "react";
 import {initShowContentState, ShowContentState} from "./ShowContentState";
-import {useGetFileMutation} from "../../../../data/dropbox/DropboxFilesApi";
+import {useGetFileMutation} from "../../../../data/api/dropbox/DropboxFilesApi";
 import {useCookies} from "react-cookie";
 import {ErrorConverter} from "../../../../domain/errors/ErrorConverter";
-import {Buffer} from 'buffer';
 
 export default function ShowContentViewModel(fileId: string) {
 

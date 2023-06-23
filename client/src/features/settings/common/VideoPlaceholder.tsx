@@ -2,8 +2,7 @@ import React from "react";
 import ReactPlayer from "react-player";
 
 VideoPlaceholder.defaultProps = {
-    onPointerMove: () => {
-    }
+    onPointerMove: () => undefined
 }
 
 export default function VideoPlaceholder(props: any) {

@@ -4,8 +4,6 @@ import {buttonTheme, inputStyle} from "../../../ui/Themes";
 import test from "../assets/test.jpeg"
 import useViewModel from "./LogoOverlayViewModel"
 import {Sketch} from '@uiw/react-color';
-import {useState} from "react";
-import ReactCrop, {Crop} from "react-image-crop";
 
 export function LogoOverlayPage(this: any) {
     const {
@@ -23,7 +21,6 @@ export function LogoOverlayPage(this: any) {
         onChangeStrokeColor,
         onChangeStrokeWidth,
         handleChangeTextColor,
-        imageFile,
         onChangeTextColor,
         onMaxLengthChanged,
         uploadImagesResult,
@@ -32,8 +29,6 @@ export function LogoOverlayPage(this: any) {
         translate,
         onLineCountChanged
     } = useViewModel()
-
-    const [crop, setCrop] = useState<Crop>()
 
     const logoStyle = "select-none cursor-pointer z-10 w-[18em] h-[4em] justify-center flex items-center text-white"
     return <div className="h-full relative">
@@ -169,7 +164,8 @@ export function LogoOverlayPage(this: any) {
                             <h2 className="text-xl mr-24">Text color</h2>
                             <input
                                 onClick={handleChangeTextColor}
-                                onChange={(path) => {
+                                onChange={(field) => {
+                                    onChangeTextColor(field.target.value)
                                 }}
                                 placeholder="white"
                                 className={inputStyle} />
@@ -195,8 +191,6 @@ export function LogoOverlayPage(this: any) {
                 <div className="space-y-4 mt-4">
                     <h2 className="text-xl mr-24">Font</h2>
                     <input
-                        onChange={(path) => {
-                        }}
                         placeholder="Arial"
                         className={inputStyle} />
                     {

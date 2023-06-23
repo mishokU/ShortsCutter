@@ -1,4 +1,4 @@
-import {useLoginMutation} from "../../data/dropbox/DropboxLoginApi";
+import {useLoginMutation} from "../../data/api/dropbox/DropboxLoginApi";
 
 export default function AuthViewModel() {
 

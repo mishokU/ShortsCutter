@@ -12,14 +12,16 @@ export function FileItem({file, onFileClick, onCheckClick}: FileProps) {
         <h2
             className="w-full text-xl pr-4"
             onClick={() => onFileClick(file.id)}>{file.name}</h2>
-        <div>
+        {file.name.endsWith(".mp4") && <div>
             <div className="flex items-center h-5">
                 <input
+                    id="selectVideoDiv"
                     onChange={() => onCheckClick(file)}
                     type="checkbox"
+                    checked={file.isChecked}
                     value=""
-                    className="w-6 h-6 accent-secondary bg-gray-100 border-gray-300 rounded-md" />
+                    className="w-6 h-6 cursor-pointer accent-secondary bg-gray-100 border-gray-300 rounded-md" />
             </div>
-        </div>
+        </div>}
     </div>
 }

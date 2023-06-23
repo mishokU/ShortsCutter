@@ -14,8 +14,8 @@ export default function LogoOverlayViewModel() {
     const textLeftBorder = 192
     const textRightBorder = 574
 
-    const boxReference = useRef(null)
-    const textReference = useRef(null)
+    const boxReference = useRef<HTMLDivElement | null>(null)
+    const textReference = useRef<HTMLDivElement | null>(null)
 
     const [isSelected, setIsSelected] = useState(false)
     const [isTextSelected, setIsTextSelected] = useState(false)
@@ -46,16 +46,13 @@ export default function LogoOverlayViewModel() {
         if (e.target.title === "Logo" && !isDragging) {
             setIsSelected(!isSelected)
         } else {
-            console.log("fefew")
             setIsTextSelected(!isTextSelected)
         }
     }
 
     const handleDragMove = (event: any) => {
         const type = event.target.title
-        console.log(type)
-        if (type === "Logo") {
-            // @ts-ignore
+        if (type === "Logo" && boxReference.current !== null) {
             const coordinates = boxReference.current.getBoundingClientRect()
             if (coordinates.y <= bottomBorder && coordinates.x <= rightBorder && coordinates.x >= leftBorder && coordinates.y >= topBorder) {
                 setTranslate({x: translate.x + event.movementX, y: translate.y + event.movementY})
@@ -68,8 +65,7 @@ export default function LogoOverlayViewModel() {
 
     const handleTextDragMove = (event: any) => {
         const type = event.target.title
-        if (type === "Text") {
-            // @ts-ignore
+        if (type === "Text" && textReference.current !== null) {
             const coordinates = textReference.current.getBoundingClientRect()
             if (coordinates.y <= textBottomBorder && coordinates.x <= textRightBorder && coordinates.x >= textLeftBorder && coordinates.y >= topBorder) {
                 setTextTranslate({x: textTranslate.x + event.movementX, y: textTranslate.y + event.movementY})
